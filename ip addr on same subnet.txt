@@ -1,0 +1,27 @@
+# function to  convert ip addr to binary
+def _convBinary(ip):
+    ip_octet = ip.split(".")
+    ip_binary = [format(int(i),'08b') for i in ip_octet]
+    binary = ''.join(ip_binary)
+    return binary
+
+# performing bitwise AND on ip addr and subnet
+def _bitwiseAND(ip,sub):
+    ans = ""
+    for i in range(0,32):
+        if ip[i] == '1' or sub[i] == '0':
+            ans += "0"
+        else:
+            ans += "1"
+    return ans
+
+ip1 = _convBinary('192.168.12.100') # ip addr 1
+ip2 = _convBinary('192.168.125.100') # ip addr 2
+subnet = _convBinary('255.255.255.0') # subnet addr
+
+comp1 = _bitwiseAND(ip1,subnet)
+comp2 = _bitwiseAND(ip2,subnet)
+if comp1 == comp2:
+    print "same subnet"
+else:
+    print "different subnet"
